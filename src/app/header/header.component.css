@@ -1,0 +1,23 @@
+header {
+  background-color: #780fb4;
+  padding: 20px;
+  text-align: center;
+}
+
+header img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  color: #fff;
+  font-size: 2em;
+  margin: 0;
+}
+
+header p {
+  color: #fff;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
