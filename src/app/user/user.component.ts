@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input , output} from '@angular/core';
+import { User } from './users.model';
 
 @Component({
   imports: [],
@@ -7,5 +8,15 @@ import { Component } from '@angular/core';
   templateUrl: './user.component.html',
 })
 export class UserComponent {
-  name = "Scooby Jew";
+  user = input.required<User>(); //the interface we created
+  select = output<string>();
+  selected = input.required<boolean>();
+  
+  get imagePath(){
+    return 'assets/users/' + this.user().avatar
+  }
+  
+  onSelectUser(){
+    this.select.emit(this.user().id);
+  }
 }
