@@ -1,20 +1,26 @@
-import { Component, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TaskComponent } from './task/task.component';
+import { TaskService } from './task/tasks.service';
 
 @Component({
-  imports: [],
   selector: 'app-tasks',
-  styleUrl: './tasks.component.css',
+  standalone: true,
+  imports: [TaskComponent],
   templateUrl: './tasks.component.html',
+  styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  user = input<string>('user');
-  username = input<string>('username');
+  // Values sent by the parent (AppComponent): [name]="..." and [userId]="..."
+  // "required: true" means Angular shows an error if the parent forgets to pass them.
+  @Input({ required: true }) name?: string;
+  @Input({ required: true }) userId!: string;
 
-  Tasklist = [
-    { id: 1, userId: 'u1', name: 'Task1', description: 'Des of Task1', status: 'Pending' },
-    { id: 2, userId: 'u2', name: 'Task2', description: 'Des of Task1', status: 'Pending' },
-    { id: 3, userId: 'u3', name: 'Task3', description: 'Des of Task1', status: 'Pending' },
-    { id: 4, userId: 'u4', name: 'Task4', description: 'Des of Task1', status: 'Pending' },
-  ]
+  // The shared TaskService is injected through the constructor (same instance as in TaskComponent)
+  constructor(private tasksService: TaskService) {}
+
+  // A getter is re-run every time Angular checks the template.
+  // So when a task is removed from the service, this list is recalculated and the screen updates.
+  get selectedUserTasks() {
+    return this.tasksService.getUserTasks(this.userId);
+  }
 }
-/tasks.component.html'

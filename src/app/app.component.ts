@@ -11,14 +11,14 @@ import { DUMMY_USERS } from './dummy-users';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  users = DUMMY_USERS; //an exportable array
-  selectedUserId? : string;
+  users = DUMMY_USERS;
+  selectedUserId?: string;
 
-  get selectedUser(){
-    return this.users.find((user) => user.id === this.selectedUserId)
+  get selectedUser() {
+    return this.users.find((user) => user.id === this.selectedUserId);
   }
 
-  onSelectUser(id: string){
+  onSelectUser(id: string) {
     this.selectedUserId = id;
   }
 }
